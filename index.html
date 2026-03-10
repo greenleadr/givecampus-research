@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GiveCampus Interview Prep</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --border: #2e3350;
+      --accent: #4f8ef7;
+      --accent2: #7c5cbf;
+      --green: #3ecf8e;
+      --yellow: #f7c948;
+      --red: #f76e6e;
+      --text: #e8eaf2;
+      --muted: #8890b0;
+      --radius: 10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ── */
+    .app { display: flex; flex-direction: column; min-height: 100vh; }
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; color: #fff;
+    }
+    .logo-text h1 { font-size: 16px; font-weight: 700; letter-spacing: .3px; }
+    .logo-text p { font-size: 12px; color: var(--muted); }
+    .progress-bar {
+      display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted);
+    }
+    .progress-track {
+      width: 120px; height: 6px;
+      background: var(--surface2); border-radius: 99px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+      transition: width .4s ease;
+    }
+
+    /* ── Tabs ── */
+    .tabs {
+      display: flex; gap: 4px;
+      padding: 12px 28px 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 13px; font-weight: 500;
+      padding: 8px 14px; border-radius: 6px 6px 0 0;
+      border-bottom: 2px solid transparent;
+      transition: all .2s; white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text); background: var(--surface2); }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); background: var(--surface2); }
+
+    /* ── Content ── */
+    .content { flex: 1; padding: 32px 28px; max-width: 900px; width: 100%; margin: 0 auto; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+      margin-bottom: 16px;
+    }
+    .card h2 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+    .card h3 { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
+    .card p { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+    .card p:last-child { margin-bottom: 0; }
+    .card ul { padding-left: 18px; color: var(--muted); font-size: 14px; }
+    .card li { margin-bottom: 5px; }
+    .card strong { color: var(--text); }
+
+    /* ── Stat grid ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px; margin-bottom: 16px;
+    }
+    .stat-card {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; text-align: center;
+    }
+    .stat-number { font-size: 26px; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* ── Tags ── */
+    .tag {
+      display: inline-block;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--muted); font-size: 11px; font-weight: 600;
+      padding: 2px 8px; border-radius: 99px; margin: 2px 2px 2px 0;
+      text-transform: uppercase; letter-spacing: .5px;
+    }
+    .tag.green { background: rgba(62,207,142,.1); border-color: rgba(62,207,142,.3); color: var(--green); }
+    .tag.red { background: rgba(247,110,110,.1); border-color: rgba(247,110,110,.3); color: var(--red); }
+    .tag.yellow { background: rgba(247,201,72,.1); border-color: rgba(247,201,72,.3); color: var(--yellow); }
+    .tag.blue { background: rgba(79,142,247,.1); border-color: rgba(79,142,247,.3); color: var(--accent); }
+    .tag.purple { background: rgba(124,92,191,.1); border-color: rgba(124,92,191,.3); color: var(--accent2); }
+
+    /* ── Section headers ── */
+    .section-header {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 12px; margin-top: 28px; padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-header:first-child { margin-top: 0; }
+
+    /* ── Question cards ── */
+    .q-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;
+    }
+    .q-header {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 16px 18px; cursor: pointer;
+      transition: background .15s;
+    }
+    .q-header:hover { background: var(--surface2); }
+    .q-num {
+      flex-shrink: 0; width: 26px; height: 26px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: var(--muted);
+    }
+    .q-text { flex: 1; font-size: 14px; font-weight: 500; padding-top: 3px; }
+    .q-chevron {
+      flex-shrink: 0; color: var(--muted); font-size: 12px;
+      transition: transform .2s; padding-top: 5px;
+    }
+    .q-card.open .q-chevron { transform: rotate(90deg); }
+    .q-body {
+      display: none; padding: 0 18px 16px 56px;
+      font-size: 13.5px; color: var(--muted); line-height: 1.7;
+      border-top: 1px solid var(--border);
+    }
+    .q-card.open .q-body { display: block; padding-top: 14px; }
+    .q-body strong { color: var(--text); }
+
+    /* ── Checklist ── */
+    .check-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .check-item:last-child { border-bottom: none; }
+    .check-item input[type=checkbox] {
+      flex-shrink: 0; appearance: none;
+      width: 20px; height: 20px; border-radius: 5px;
+      border: 2px solid var(--border);
+      background: var(--surface2); cursor: pointer;
+      position: relative; margin-top: 1px;
+      transition: all .15s;
+    }
+    .check-item input[type=checkbox]:checked {
+      background: var(--accent); border-color: var(--accent);
+    }
+    .check-item input[type=checkbox]:checked::after {
+      content: '✓'; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      color: #fff; font-size: 12px; font-weight: 700;
+    }
+    .check-label { flex: 1; }
+    .check-label strong { font-size: 14px; display: block; margin-bottom: 3px; }
+    .check-label span { font-size: 13px; color: var(--muted); }
+    .check-item.done .check-label strong { color: var(--muted); text-decoration: line-through; }
+
+    /* ── Flashcard mode ── */
+    .flashcard-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+    }
+    .flashcard-counter { font-size: 13px; color: var(--muted); }
+    .btn {
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); font-size: 13px; font-weight: 500;
+      padding: 7px 16px; border-radius: 7px; cursor: pointer;
+      transition: all .15s;
+    }
+    .btn:hover { background: var(--border); }
+    .btn.primary {
+      background: var(--accent); border-color: var(--accent);
+      color: #fff;
+    }
+    .btn.primary:hover { opacity: .85; }
+    .flashcard {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      min-height: 240px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; gap: 16px;
+    }
+    .flashcard-category {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--accent); margin-bottom: 6px;
+    }
+    .flashcard-question { font-size: 18px; font-weight: 600; line-height: 1.5; max-width: 600px; }
+    .flashcard-reveal {
+      margin-top: 12px; padding: 16px 20px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; font-size: 13.5px; color: var(--muted);
+      text-align: left; max-width: 660px; width: 100%;
+      line-height: 1.7;
+    }
+    .flashcard-nav {
+      display: flex; justify-content: center; gap: 10px; margin-top: 16px;
+    }
+    .flashcard-dots {
+      display: flex; justify-content: center; gap: 6px; margin-top: 14px;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--border); transition: background .2s;
+    }
+    .dot.active { background: var(--accent); }
+
+    /* ── Notes ── */
+    .notes-area {
+      width: 100%; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      color: var(--text); font-size: 14px; font-family: inherit;
+      padding: 14px 16px; resize: vertical; min-height: 160px;
+      line-height: 1.7; transition: border-color .15s;
+    }
+    .notes-area:focus { outline: none; border-color: var(--accent); }
+    .notes-saved { font-size: 12px; color: var(--green); opacity: 0; transition: opacity .4s; }
+    .notes-saved.show { opacity: 1; }
+
+    /* ── Sources ── */
+    .source-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+    }
+    .source-item:last-child { border-bottom: none; }
+    .source-item a { color: var(--accent); text-decoration: none; }
+    .source-item a:hover { text-decoration: underline; }
+    .source-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* ── Two-col grid ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 620px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ── Callout ── */
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: rgba(79,142,247,.07);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px; font-size: 13.5px;
+      color: var(--muted); margin-bottom: 16px;
+    }
+    .callout.yellow { border-left-color: var(--yellow); background: rgba(247,201,72,.07); }
+    .callout.red { border-left-color: var(--red); background: rgba(247,110,110,.07); }
+    .callout strong { color: var(--text); }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <div class="logo">
+      <div class="logo-icon">GC</div>
+      <div class="logo-text">
+        <h1>GiveCampus Interview Prep</h1>
+        <p>Senior Product Manager &nbsp;·&nbsp; Interactive Prep Tool</p>
+      </div>
+    </div>
+    <div class="progress-bar">
+      <span id="progress-label">0 / 10 reviewed</span>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="overview">Company Overview</button>
+    <button class="tab-btn" data-tab="strategy">Strategy &amp; Market</button>
+    <button class="tab-btn" data-tab="questions">Questions to Ask</button>
+    <button class="tab-btn" data-tab="self">Questions for Yourself</button>
+    <button class="tab-btn" data-tab="practice">Flashcard Practice</button>
+    <button class="tab-btn" data-tab="notes">My Notes</button>
+    <button class="tab-btn" data-tab="sources">Sources</button>
+  </div>
+
+  <div class="content">
+
+    <!-- ═══ OVERVIEW ═══ -->
+    <div class="tab-panel active" id="panel-overview">
+      <div class="section-header">At a Glance</div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-number">1,300+</div><div class="stat-label">Schools on platform</div></div>
+        <div class="stat-card"><div class="stat-number">$6B+</div><div class="stat-label">Charitable giving facilitated</div></div>
+        <div class="stat-card"><div class="stat-number">$1B</div><div class="stat-label">Annual processing target</div></div>
+        <div class="stat-card"><div class="stat-number">$50M</div><div class="stat-label">Growth equity (Silversmith, 2022)</div></div>
+        <div class="stat-card"><div class="stat-number">~124</div><div class="stat-label">Employees (remote-first)</div></div>
+        <div class="stat-card"><div class="stat-number">2014</div><div class="stat-label">Founded (Y Combinator)</div></div>
+      </div>
+
+      <div class="callout">
+        <strong>The core thesis:</strong> 90% of college grads who give to charity don't give back to their school — GiveCampus is building the infrastructure to close that gap for 1,300+ educational institutions.
+      </div>
+
+      <div class="section-header">Founders</div>
+      <div class="two-col">
+        <div class="card">
+          <h3>Michael Kong</h3>
+          <p>Co-founder &amp; CEO. Ex-Facebook engineer. Brings the technical product foundation and credibility in modern consumer-grade UX.</p>
+        </div>
+        <div class="card">
+          <h3>Kestrel Linder</h3>
+          <p>Co-founder. Ex-government consultant. Brings the institutional relationships and sector fluency for navigating higher ed procurement.</p>
+        </div>
+      </div>
+
+      <div class="section-header">Core Product Capabilities</div>
+      <div class="two-col">
+        <div class="card">
+          <h3>Fundraising Infrastructure</h3>
+          <ul>
+            <li>Online giving pages (PayPal, Venmo, Apple Pay, DAFs, crypto)</li>
+            <li>Giving day campaigns &amp; crowdfunding</li>
+            <li>Peer-to-peer fundraising</li>
+            <li>Event registration</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Engagement &amp; Outreach</h3>
+          <ul>
+            <li>Texting &amp; personalized video outreach</li>
+            <li>Volunteer management for alumni relations</li>
+            <li>Wealth data &amp; analytics</li>
+          </ul>
+        </div>
+        <div class="card" style="border-color: rgba(79,142,247,.4);">
+          <h3>GC Intelligence (AI Engine)</h3>
+          <ul>
+            <li>Predictive donor targeting</li>
+            <li>Smart suggested ask amounts</li>
+            <li>Generative AI for outreach content</li>
+            <li>Contact reports automation</li>
+            <li>AI chat assistant</li>
+          </ul>
+          <div style="margin-top: 8px;"><span class="tag blue">Central Differentiation Bet</span></div>
+        </div>
+        <div class="card" style="border-color: rgba(124,92,191,.4);">
+          <h3>GC Gift Officer</h3>
+          <ul>
+            <li>Built specifically for major gift officers</li>
+            <li>AI-automated contact reports</li>
+            <li>Personalized outreach at scale</li>
+          </ul>
+          <div style="margin-top: 8px;"><span class="tag purple">Newer Product Line</span></div>
+        </div>
+      </div>
+
+      <div class="section-header">Role Context</div>
+      <div class="card">
+        <h3>Senior Product Manager</h3>
+        <p>Reports to the <strong>Head of Product</strong>. Works cross-functionally with Engineering, Data Science, Partner Operations, Partner Success, Marketing, and Business Development.</p>
+        <br>
+        <p><strong>What the job posting signals:</strong></p>
+        <ul>
+          <li>5+ years PM experience required; startup experience preferred</li>
+          <li>Comfort with CRM concepts</li>
+          <li>Both B2B and B2C sensibility</li>
+          <li>Emphasis on "driving user trial/adoption/usage" — this is a <strong>growth-stage PM role</strong>, not a maintenance role</li>
+          <li>Target: 100% year-over-year growth in philanthropic dollars processed</li>
+        </ul>
+      </div>
+
+      <div class="section-header">Culture Signal (Glassdoor: 3.2/5)</div>
+      <div class="two-col">
+        <div class="card">
+          <h3 style="color: var(--green);">What's praised</h3>
+          <ul>
+            <li>People described as kind, bright, mission-driven</li>
+            <li>Meaningful work in education</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--red);">What's flagged</h3>
+          <ul>
+            <li>Leadership turnover &amp; shifting priorities</li>
+            <li>Founders reluctant to cede control</li>
+            <li>Below-average pay for non-management roles</li>
+            <li>Retention issues</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout yellow"><strong>Tip:</strong> Multiple Glassdoor reviewers recommend specifically asking junior and mid-level staff how culture has evolved.</div>
+    </div>
+
+    <!-- ═══ STRATEGY ═══ -->
+    <div class="tab-panel" id="panel-strategy">
+      <div class="section-header">Growth Ambitions</div>
+      <div class="callout">
+        <strong>5x revenue in 3 years.</strong> $100M committed to product development. The Senior PM job posting makes this target explicit — understand how product is expected to drive it.
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <h3>Higher Ed (Core Market)</h3>
+          <p>550+ colleges &amp; universities. Growing need as tuition revenue shrinks. AI differentiation is the primary moat play here.</p>
+          <span class="tag blue">Core</span>
+        </div>
+        <div class="card">
+          <h3>K-12 (Growth Vector)</h3>
+          <p>750+ independent schools. Raised $2B+. Meaningful second growth vector that doesn't cannibalize the higher ed motion.</p>
+          <span class="tag green">Expanding</span>
+        </div>
+      </div>
+
+      <div class="section-header">Macro Tailwinds &amp; Headwinds</div>
+      <div class="card">
+        <h3 style="color: var(--red);">Headwinds (but why GC's value prop gets more urgent)</h3>
+        <ul>
+          <li>Projected <strong>13% enrollment decline through 2041</strong></li>
+          <li>International student enrollment <strong>down 17% in fall 2025</strong></li>
+          <li>More than half of private universities running operating deficits</li>
+          <li><strong>Grad PLUS loan elimination starting July 2026</strong> will further depress institutional revenue</li>
+          <li>Donor base consolidating — total giving up but individual donor count declining</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--green);">Tailwinds</h3>
+        <ul>
+          <li>Schools need fundraising to work <strong>harder</strong> because tuition revenue is shrinking — urgency for GC's value prop</li>
+          <li>55% of K-12 schools and 51% of higher ed institutions reported fundraising growth last year</li>
+          <li><strong>$100 trillion intergenerational wealth transfer</strong> from Boomers reshaping donor landscape</li>
+        </ul>
+      </div>
+
+      <div class="section-header">Competitive Landscape</div>
+      <div class="card">
+        <h3>Blackbaud</h3>
+        <p>The 800-pound gorilla. Broad nonprofit focus, legacy infrastructure, slower on AI and modern UX. <strong>Currently lists GiveCampus as a partner</strong> — not yet perceived as a direct enterprise threat, but that could change.</p>
+        <span class="tag yellow">Primary Incumbent</span>
+      </div>
+      <div class="card">
+        <h3>EverTrue</h3>
+        <p>Competes specifically on donor intelligence and social data for advancement teams. More direct overlap with GC Intelligence and GC Gift Officer.</p>
+        <span class="tag yellow">Intelligence Competitor</span>
+      </div>
+      <div class="callout">
+        <strong>GiveCampus differentiation:</strong> Education-only focus + faster AI execution + modern UX. The Blackbaud partnership is strategically interesting but fragile — if Blackbaud decides to build or acquire rather than partner, dynamics shift.
+      </div>
+
+      <div class="section-header">AI Strategy</div>
+      <div class="card">
+        <h3>GC Intelligence — Central Differentiation Bet</h3>
+        <p>Being woven into every part of the platform. The key question to ask: <strong>are they measuring AI impact on actual fundraising outcomes?</strong> Features are easy to ship and hard to prove value for.</p>
+        <br>
+        <ul>
+          <li>Predictive modeling for donor likelihood and ask amounts</li>
+          <li>Generative AI for outreach content</li>
+          <li>Workflow automation for gift officers</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ QUESTIONS TO ASK THEM ═══ -->
+    <div class="tab-panel" id="panel-questions">
+      <div class="callout">
+        Click any question to expand what it reveals and why it matters. Check off questions you've reviewed.
+      </div>
+
+      <div id="ask-them-list"></div>
+    </div>
+
+    <!-- ═══ QUESTIONS FOR YOURSELF ═══ -->
+    <div class="tab-panel" id="panel-self">
+      <div class="callout yellow">
+        These are the questions to sit with <em>before</em> accepting. Check each one off as you've genuinely thought it through.
+      </div>
+      <div class="card" id="self-checklist"></div>
+    </div>
+
+    <!-- ═══ FLASHCARD PRACTICE ═══ -->
+    <div class="tab-panel" id="panel-practice">
+      <div class="flashcard-controls">
+        <div>
+          <span class="flashcard-counter" id="fc-counter">Card 1 of 12</span>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn" id="fc-shuffle">Shuffle</button>
+          <button class="btn" id="fc-reveal">Reveal Context</button>
+          <button class="btn primary" id="fc-next">Next →</button>
+        </div>
+      </div>
+      <div class="flashcard" id="flashcard">
+        <div class="flashcard-category" id="fc-cat"></div>
+        <div class="flashcard-question" id="fc-question"></div>
+        <div class="flashcard-reveal" id="fc-reveal-text" style="display:none;"></div>
+      </div>
+      <div class="flashcard-dots" id="fc-dots"></div>
+      <div style="margin-top: 20px;">
+        <div class="section-header">What This Mode Covers</div>
+        <div class="callout">
+          Practice cards cycle through: key company facts to know cold, questions to ask interviewers (with the "why it matters" context hidden), and the personal decision questions. Use this to pressure-test what you actually know vs. what you need to review.
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ NOTES ═══ -->
+    <div class="tab-panel" id="panel-notes">
+      <div class="section-header">Your Interview Notes</div>
+      <div class="callout">
+        Saved automatically to your browser. Jot down impressions, follow-up questions, or anything you want to remember after each conversation.
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div>
+          <div style="font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:600;">Pre-Interview Prep</div>
+          <textarea class="notes-area" id="notes-prep" rows="6" placeholder="Things to research, open questions, things to confirm..."></textarea>
+          <span class="notes-saved" id="saved-prep">Saved</span>
+        </div>
+        <div>
+          <div style="font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:600;">During / After Interview</div>
+          <textarea class="notes-area" id="notes-interview" rows="8" placeholder="What came up, how answers landed, red flags, green flags..."></textarea>
+          <span class="notes-saved" id="saved-interview">Saved</span>
+        </div>
+        <div>
+          <div style="font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:600;">Gut Check &amp; Decision</div>
+          <textarea class="notes-area" id="notes-decision" rows="6" placeholder="How do you feel about the role? What needs to be true for you to say yes?"></textarea>
+          <span class="notes-saved" id="saved-decision">Saved</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOURCES ═══ -->
+    <div class="tab-panel" id="panel-sources">
+      <div class="section-header">Reference Sources</div>
+      <div class="card" id="sources-list"></div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /app -->
+
+<script>
+// ──────────────────────────────────────────────
+//  DATA
+// ──────────────────────────────────────────────
+const ASK_THEM = [
+  {
+    q: "What does the product org structure look like, and how has it changed in the last 12 months?",
+    why: "<strong>What it tests:</strong> The stability concerns flagged in Glassdoor reviews. If there's been significant reorg or turnover, you want to understand why — and whether leadership has a clear answer. Vague or defensive responses are a signal."
+  },
+  {
+    q: "How do you prioritize between building net-new products (like GC Gift Officer) versus improving the core giving platform?",
+    why: "<strong>What it reveals:</strong> Where the roadmap tension actually lives and whether the PM team has real autonomy or is reacting to founder pressure or sales demands. A good answer involves a framework; a bad answer involves 'it depends' with no further structure."
+  },
+  {
+    q: "What's the relationship between Partner Success feedback and the product roadmap? How does customer input actually get weighted against business goals?",
+    why: "<strong>Why you care:</strong> Customer-first product thinking is foundational for you. If partner feedback is consistently overridden by internal opinions, that's a red flag. You want to hear about a real process — not just 'we listen to customers.'"
+  },
+  {
+    q: "What does 5x revenue growth in 3 years actually look like in terms of product strategy? Is that coming from new customer acquisition, expansion within existing accounts, new product lines, or pricing?",
+    why: "<strong>What it forces:</strong> Specificity about how product drives the number. Vague answers here mean they haven't figured it out yet — or they're not going to share it with PM candidates, which is its own red flag."
+  },
+  {
+    q: "How are you measuring the impact of GC Intelligence on customer outcomes?",
+    why: "<strong>The real question:</strong> Is the AI push substance or marketing? Features are easy to ship and hard to prove value for. If they don't have clear metrics on how AI is moving fundraising dollars, that's either a gap you could fill — or a warning sign."
+  },
+  {
+    q: "Can you walk me through a recent product decision that was contentious? What data informed it, who had final say, and how did it land?",
+    why: "<strong>What it reveals:</strong> The actual decision-making culture, not the stated one. You value data-driven decisions and transparent reasoning. This question surfaces both — and who really holds power when things get hard."
+  },
+  {
+    q: "What does the engineering team look like in terms of size, structure, and how they partner with product?",
+    why: "<strong>Why it matters:</strong> 124 people with aggressive growth targets needs strong eng-product collaboration. Understand the ratio, the working model, and whether PMs have enough engineering capacity to actually execute on roadmap."
+  },
+  {
+    q: "How do you think about the competitive threat from Blackbaud investing in similar capabilities?",
+    why: "<strong>What it tests:</strong> Strategic awareness. The Blackbaud partnership is currently listed as a collaboration — but it's potentially fragile if Blackbaud decides to build or acquire rather than partner. A good answer shows they've thought through this contingency."
+  },
+];
+
+const SELF_QUESTIONS = [
+  {
+    label: "Does the mission land for you?",
+    detail: "Advancing education affordability and accessibility is meaningful work. Pressure-test whether that mission translates into daily product decisions or stays at the marketing level."
+  },
+  {
+    label: "Are you comfortable with growth-stage dynamics?",
+    detail: "124 people, Series A, aggressive targets. Priorities will shift. You've been at Apple, Amazon, and Google — this is a fundamentally different operating environment. More ownership and impact, less structure and more ambiguity."
+  },
+  {
+    label: "Can you work within the founder dynamic?",
+    detail: "Glassdoor signals that founders are reluctant to let go of control. You've been punished for pushing back on leadership before. Understand concretely how product decisions get made before accepting."
+  },
+  {
+    label: "Is the compensation competitive?",
+    detail: "Below-average pay for non-management was flagged multiple times in Glassdoor reviews. Know your number and don't compromise on it."
+  },
+  {
+    label: "How do you feel about the AI direction?",
+    detail: "GiveCampus is betting heavily on AI for fundraising. Given your complicated feelings about AI's broader impact, reconcile whether building AI-powered fundraising tools for education is the kind of AI work you can feel good about."
+  },
+];
+
+const FLASHCARDS = [
+  { cat: "Company Fact", q: "How many schools use GiveCampus, and what's the breakdown?", a: "1,300+ total: 550+ colleges/universities, 750+ independent K-12 schools. Over $6B raised, on track for $1B/year." },
+  { cat: "Company Fact", q: "Who founded GiveCampus and what's their background?", a: "Michael Kong (ex-Facebook engineer) and Kestrel Linder (ex-government consultant). Founded 2014 out of Y Combinator." },
+  { cat: "Company Fact", q: "What did GiveCampus raise, when, and from whom?", a: "$50M minority growth equity from Silversmith Capital Partners in 2022. Also appeared on Inc. 5000 four consecutive years." },
+  { cat: "Strategy", q: "What is GC Intelligence and why does it matter competitively?", a: "GiveCampus's AI engine: predictive donor targeting, smart ask amounts, generative AI outreach, contact reports, AI chat assistant. Central differentiation play vs. legacy competitors like Blackbaud." },
+  { cat: "Strategy", q: "What's the 3-year revenue target and the $100M commitment about?", a: "5x revenue growth in 3 years. $100M committed to product development. The Senior PM job posting explicitly references driving this growth." },
+  { cat: "Market Context", q: "What are the two main headwinds in higher education right now?", a: "13% projected enrollment decline through 2041. International student enrollment down 17% in fall 2025. More than half of private universities running operating deficits. Grad PLUS loans eliminated July 2026." },
+  { cat: "Market Context", q: "Why do the headwinds in higher ed actually strengthen GiveCampus's position?", a: "As tuition revenue shrinks, schools need fundraising to work harder. GiveCampus's value prop becomes more urgent, not less — they're selling a must-have, not a nice-to-have." },
+  { cat: "Competitive", q: "How does GiveCampus position against Blackbaud?", a: "Blackbaud is the 800-pound gorilla (legacy, broad nonprofit, slower on AI). GiveCampus differentiates on: education-only focus, faster AI execution, modern UX. Blackbaud currently lists GC as a partner — not yet a direct enterprise threat, but fragile." },
+  { cat: "Role", q: "What does the Senior PM role signal about what they want you to do?", a: "Growth-stage role, not maintenance. Emphasis on driving user trial/adoption/usage, 100% YoY growth in philanthropic dollars processed, cross-functional with Eng/Data/Partner Success/Marketing/BD." },
+  { cat: "Culture", q: "What does Glassdoor say about GiveCampus culture and what should you probe?", a: "3.2/5 overall. Positives: kind, mission-driven people. Concerns: leadership turnover, shifting priorities, founders reluctant to cede control, below-average pay for non-management. Ask junior/mid-level staff how culture has evolved." },
+  { cat: "Ask Them", q: "How do you probe whether the AI push is substance or marketing?", a: "Ask: 'How are you measuring the impact of GC Intelligence on customer outcomes?' If they don't have clear metrics on how AI is moving fundraising dollars, it may be more marketing than substance." },
+  { cat: "Ask Them", q: "How do you test whether you'll have real product autonomy vs. founder control?", a: "Ask: 'Can you walk me through a recent product decision that was contentious? What data informed it, who had final say, and how did it land?' This reveals who actually holds power when things get hard." },
+];
+
+const SOURCES = [
+  { label: "GiveCampus Homepage", url: "https://go.givecampus.com/" },
+  { label: "GiveCampus Capabilities", url: "https://go.givecampus.com/capabilities/" },
+  { label: "GC Intelligence / AI", url: "https://go.givecampus.com/capabilities/artificial-intelligence/" },
+  { label: "Inc. 5000 Recognition", url: "https://go.givecampus.com/about-us/awards-press-media/givecampus-ranks-no-2678-on-the-2025-inc-5000-list/" },
+  { label: "GiveCampus Careers", url: "https://go.givecampus.com/about-us/careers/" },
+  { label: "Senior PM Job Posting", url: "https://job-boards.greenhouse.io/givecampus/jobs/4005328009" },
+  { label: "GiveCampus on Y Combinator", url: "https://www.ycombinator.com/companies/givecampus" },
+  { label: "Glassdoor Reviews", url: "https://www.glassdoor.com/Reviews/GiveCampus-Reviews-E2427221.htm" },
+  { label: "Building a Mission-Driven Company (Blog)", url: "https://go.givecampus.com/blog/building-a-mission-driven-company/" },
+  { label: "Silversmith Capital Investment", url: "https://www.silversmith.com/news/givecampus-raises-50-million-investment-led-by-silversmith-capital-partners" },
+  { label: "2026 Higher Education Trends (Deloitte)", url: "https://www.deloitte.com/us/en/insights/industry/articles-on-higher-education/2026-higher-education-trends.html" },
+  { label: "Higher Education Fundraising (Giving USA)", url: "https://givingusa.org/higher-education-headwinds-provide-challenges-and-opportunities-for-advancement/" },
+  { label: "Education Fundraising Trends (Blackbaud)", url: "https://blog.blackbaud.com/education-fundraising-trends-k12-higher-ed/" },
+  { label: "GiveCampus Competitors (G2)", url: "https://www.g2.com/products/givecampus/competitors/alternatives" },
+  { label: "JHU Hub Article on GiveCampus Founding", url: "https://hub.jhu.edu/magazine/2017/winter/alumni-startup-givecampus-helps-schools-raise-money/" },
+];
+
+// ──────────────────────────────────────────────
+//  TABS
+// ──────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ──────────────────────────────────────────────
+//  BUILD: Questions to Ask Them
+// ──────────────────────────────────────────────
+const askList = document.getElementById('ask-them-list');
+ASK_THEM.forEach((item, i) => {
+  const key = 'q-ask-' + i;
+  const checked = localStorage.getItem(key) === '1';
+  const el = document.createElement('div');
+  el.className = 'q-card' + (checked ? ' reviewed' : '');
+  el.innerHTML = `
+    <div class="q-header" onclick="toggleQ(this)">
+      <div class="q-num">${i+1}</div>
+      <div class="q-text">${item.q}</div>
+      <div class="q-chevron">▶</div>
+    </div>
+    <div class="q-body">
+      <p>${item.why}</p>
+      <label style="display:flex;align-items:center;gap:8px;margin-top:12px;cursor:pointer;font-size:13px;color:var(--muted);">
+        <input type="checkbox" ${checked?'checked':''} onchange="markReviewed('${key}', this)" style="cursor:pointer;">
+        Mark as reviewed
+      </label>
+    </div>
+  `;
+  askList.appendChild(el);
+});
+
+function toggleQ(header) {
+  header.closest('.q-card').classList.toggle('open');
+}
+
+// ──────────────────────────────────────────────
+//  BUILD: Self Questions Checklist
+// ──────────────────────────────────────────────
+const selfList = document.getElementById('self-checklist');
+SELF_QUESTIONS.forEach((item, i) => {
+  const key = 'q-self-' + i;
+  const checked = localStorage.getItem(key) === '1';
+  const el = document.createElement('div');
+  el.className = 'check-item' + (checked ? ' done' : '');
+  el.innerHTML = `
+    <input type="checkbox" id="self-${i}" ${checked?'checked':''} onchange="markSelf('${key}', this, this.closest('.check-item'))">
+    <label class="check-label" for="self-${i}">
+      <strong>${item.label}</strong>
+      <span>${item.detail}</span>
+    </label>
+  `;
+  selfList.appendChild(el);
+});
+
+function markSelf(key, cb, row) {
+  localStorage.setItem(key, cb.checked ? '1' : '0');
+  row.classList.toggle('done', cb.checked);
+  updateProgress();
+}
+
+// ──────────────────────────────────────────────
+//  PROGRESS
+// ──────────────────────────────────────────────
+const TOTAL = ASK_THEM.length + SELF_QUESTIONS.length;
+
+function countReviewed() {
+  let n = 0;
+  for (let i = 0; i < ASK_THEM.length; i++) if (localStorage.getItem('q-ask-'+i)==='1') n++;
+  for (let i = 0; i < SELF_QUESTIONS.length; i++) if (localStorage.getItem('q-self-'+i)==='1') n++;
+  return n;
+}
+
+function updateProgress() {
+  const n = countReviewed();
+  document.getElementById('progress-label').textContent = n + ' / ' + TOTAL + ' reviewed';
+  document.getElementById('progress-fill').style.width = Math.round(n/TOTAL*100) + '%';
+}
+
+function markReviewed(key, cb) {
+  localStorage.setItem(key, cb.checked ? '1' : '0');
+  updateProgress();
+}
+
+updateProgress();
+
+// ──────────────────────────────────────────────
+//  FLASHCARDS
+// ──────────────────────────────────────────────
+let cards = [...FLASHCARDS];
+let fcIdx = 0;
+let revealed = false;
+
+function renderCard() {
+  const c = cards[fcIdx];
+  document.getElementById('fc-cat').textContent = c.cat;
+  document.getElementById('fc-question').textContent = c.q;
+  document.getElementById('fc-counter').textContent = 'Card ' + (fcIdx+1) + ' of ' + cards.length;
+  const revEl = document.getElementById('fc-reveal-text');
+  revEl.innerHTML = c.a;
+  revEl.style.display = 'none';
+  revealed = false;
+  document.getElementById('fc-reveal').textContent = 'Reveal Context';
+  renderDots();
+}
+
+function renderDots() {
+  const dotsEl = document.getElementById('fc-dots');
+  dotsEl.innerHTML = '';
+  cards.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === fcIdx ? ' active' : '');
+    dotsEl.appendChild(d);
+  });
+}
+
+document.getElementById('fc-reveal').addEventListener('click', () => {
+  const revEl = document.getElementById('fc-reveal-text');
+  revealed = !revealed;
+  revEl.style.display = revealed ? 'block' : 'none';
+  document.getElementById('fc-reveal').textContent = revealed ? 'Hide Context' : 'Reveal Context';
+});
+
+document.getElementById('fc-next').addEventListener('click', () => {
+  fcIdx = (fcIdx + 1) % cards.length;
+  renderCard();
+});
+
+document.getElementById('fc-shuffle').addEventListener('click', () => {
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+  fcIdx = 0;
+  renderCard();
+});
+
+renderCard();
+
+// ──────────────────────────────────────────────
+//  NOTES  (auto-save to localStorage)
+// ──────────────────────────────────────────────
+['prep', 'interview', 'decision'].forEach(key => {
+  const el = document.getElementById('notes-' + key);
+  const saved = document.getElementById('saved-' + key);
+  const storageKey = 'notes-gc-' + key;
+  el.value = localStorage.getItem(storageKey) || '';
+  let timer;
+  el.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      localStorage.setItem(storageKey, el.value);
+      saved.classList.add('show');
+      setTimeout(() => saved.classList.remove('show'), 1800);
+    }, 600);
+  });
+});
+
+// ──────────────────────────────────────────────
+//  SOURCES
+// ──────────────────────────────────────────────
+const sourcesList = document.getElementById('sources-list');
+SOURCES.forEach(s => {
+  const el = document.createElement('div');
+  el.className = 'source-item';
+  el.innerHTML = `<div class="source-dot"></div><a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`;
+  sourcesList.appendChild(el);
+});
+</script>
+</body>
+</html>
