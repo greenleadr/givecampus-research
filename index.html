@@ -294,7 +294,7 @@
       <div class="logo-icon">GC</div>
       <div class="logo-text">
         <h1>GiveCampus Interview Prep</h1>
-        <p>Senior Product Manager &nbsp;·&nbsp; Interactive Prep Tool</p>
+        <p>Senior Technical Program Manager &nbsp;·&nbsp; Interactive Prep Tool</p>
       </div>
     </div>
     <div class="progress-bar">
@@ -386,17 +386,39 @@
 
       <div class="section-header">Role Context</div>
       <div class="card">
-        <h3>Senior Product Manager</h3>
-        <p>Reports to the <strong>Head of Product</strong>. Works cross-functionally with Engineering, Data Science, Partner Operations, Partner Success, Marketing, and Business Development.</p>
+        <h3>Senior Technical Program Manager</h3>
+        <p>A <strong>dual-function role</strong>: TPM owning execution across Infrastructure, Security, Data Engineering, and ML Engineering — plus Platform PM for Infrastructure, acting as the voice of internal customers and shaping the platform roadmap. The posting's framing: <em>"the connective tissue that keeps complex technical initiatives on track."</em></p>
         <br>
         <p><strong>What the job posting signals:</strong></p>
         <ul>
-          <li>5+ years PM experience required; startup experience preferred</li>
-          <li>Comfort with CRM concepts</li>
-          <li>Both B2B and B2C sensibility</li>
-          <li>Emphasis on "driving user trial/adoption/usage" — this is a <strong>growth-stage PM role</strong>, not a maintenance role</li>
-          <li>Target: 100% year-over-year growth in philanthropic dollars processed</li>
+          <li><strong>10+ years</strong> TPM experience required — this is a senior individual contributor role</li>
+          <li>AWS environments: migrations, infrastructure buildouts, cloud operations</li>
+          <li>SOC 2 and PCI compliance program management</li>
+          <li>Translating engineering requirements into platform deliverables</li>
+          <li>Agile tooling: <strong>Linear</strong> called out specifically (not just Jira)</li>
+          <li>No direct reports — influence is through clarity, relationships, and process</li>
+          <li>Nice to have: security/DevOps/data engineering background; Platform PM or internal tools experience</li>
         </ul>
+      </div>
+      <div class="two-col">
+        <div class="card" style="border-color: rgba(79,142,247,.4);">
+          <h3>Program Management Scope</h3>
+          <ul>
+            <li>Own execution across 4 teams: Infrastructure, Security, Data Eng, ML Eng</li>
+            <li>Work intake, prioritization, tracking in Linear</li>
+            <li>Run standups, facilitate team ceremonies</li>
+            <li>Identify and resolve dependencies, risks, blockers</li>
+          </ul>
+        </div>
+        <div class="card" style="border-color: rgba(124,92,191,.4);">
+          <h3>Platform PM Scope</h3>
+          <ul>
+            <li>Represent internal customers (App Eng, Data Eng, ML Eng)</li>
+            <li>Define and maintain infrastructure platform roadmap</li>
+            <li>Translate requirements into actionable work for DevOps/SRE</li>
+            <li>Balance competing priorities across stakeholder teams</li>
+          </ul>
+        </div>
       </div>
 
       <div class="section-header">Culture Signal (Glassdoor: 3.2/5)</div>
@@ -425,7 +447,7 @@
     <div class="tab-panel" id="panel-strategy">
       <div class="section-header">Growth Ambitions</div>
       <div class="callout">
-        <strong>5x revenue in 3 years.</strong> $100M committed to product development. The Senior PM job posting makes this target explicit — understand how product is expected to drive it.
+        <strong>5x revenue in 3 years.</strong> $100M committed to product development. As TPM, your scope sits in the engine room — the infrastructure, security, and data platform decisions that determine whether that growth is technically sustainable.
       </div>
       <div class="two-col">
         <div class="card">
@@ -572,75 +594,85 @@
 // ──────────────────────────────────────────────
 const ASK_THEM = [
   {
-    q: "What does the product org structure look like, and how has it changed in the last 12 months?",
-    why: "<strong>What it tests:</strong> The stability concerns flagged in Glassdoor reviews. If there's been significant reorg or turnover, you want to understand why — and whether leadership has a clear answer. Vague or defensive responses are a signal."
+    q: "How are Infrastructure, Security, Data Engineering, and ML Engineering currently organized — do they share a single manager, or are there separate leads you'd coordinate across?",
+    why: "<strong>What it reveals:</strong> The real reporting structure and political landscape you'd be navigating as connective tissue. If these teams have separate leads with competing priorities, your leverage and credibility will need to be earned, not assumed. If they're under a unified leader, understand whether that person is a partner or an obstacle."
   },
   {
-    q: "How do you prioritize between building net-new products (like GC Gift Officer) versus improving the core giving platform?",
-    why: "<strong>What it reveals:</strong> Where the roadmap tension actually lives and whether the PM team has real autonomy or is reacting to founder pressure or sales demands. A good answer involves a framework; a bad answer involves 'it depends' with no further structure."
+    q: "What does the current infrastructure platform roadmap look like, and how much of it is driven by internal customer requests vs. technical debt vs. compliance obligations?",
+    why: "<strong>What it surfaces:</strong> What you're actually walking into. A backlog dominated by compliance remediations is a very different day-to-day than one focused on developer experience improvements. You want to know the mix before you accept — and whether there's even a structured roadmap at all, or just a pile of asks."
   },
   {
-    q: "What's the relationship between Partner Success feedback and the product roadmap? How does customer input actually get weighted against business goals?",
-    why: "<strong>Why you care:</strong> Customer-first product thinking is foundational for you. If partner feedback is consistently overridden by internal opinions, that's a red flag. You want to hear about a real process — not just 'we listen to customers.'"
+    q: "Where are you in your SOC 2 and PCI compliance posture — maintaining a certification, actively pursuing one, or remediating gaps?",
+    why: "<strong>Why it matters:</strong> These programs have wildly different scopes depending on maturity. Maintaining a clean SOC 2 is routine work. Remediating gaps under a deadline is fire-fighting. Understanding the current state tells you whether this is a structured program you'd own or a crisis you'd be inheriting."
   },
   {
-    q: "What does 5x revenue growth in 3 years actually look like in terms of product strategy? Is that coming from new customer acquisition, expansion within existing accounts, new product lines, or pricing?",
-    why: "<strong>What it forces:</strong> Specificity about how product drives the number. Vague answers here mean they haven't figured it out yet — or they're not going to share it with PM candidates, which is its own red flag."
+    q: "How do internal engineering teams currently request and prioritize infrastructure work? What's broken about that process today?",
+    why: "<strong>The real question:</strong> The job says you'll be 'the voice of internal customers.' You need to understand how messy or formalized the current intake process is. No service catalog and a Slack-driven free-for-all is a very different starting point than a partially-functioning Jira workflow. Ask what's broken — not what the ideal state is."
   },
   {
-    q: "How are you measuring the impact of GC Intelligence on customer outcomes?",
-    why: "<strong>The real question:</strong> Is the AI push substance or marketing? Features are easy to ship and hard to prove value for. If they don't have clear metrics on how AI is moving fundraising dollars, that's either a gap you could fill — or a warning sign."
+    q: "The posting says 'shipping the right thing — not just more things.' Can you give a recent example where you said no to a piece of infrastructure or engineering work, and what happened?",
+    why: "<strong>What it tests:</strong> Whether this framing is real cultural practice or just polished JD copy. A specific story with actual tension reveals a team that genuinely prioritizes. A pivot to abstract principles suggests the discipline isn't there yet — and you'd be fighting for it from day one."
   },
   {
-    q: "Can you walk me through a recent product decision that was contentious? What data informed it, who had final say, and how did it land?",
-    why: "<strong>What it reveals:</strong> The actual decision-making culture, not the stated one. You value data-driven decisions and transparent reasoning. This question surfaces both — and who really holds power when things get hard."
+    q: "Is Linear fully adopted across these four teams, or would driving that adoption be part of the role?",
+    why: "<strong>Why it matters:</strong> Linear is called out in the JD specifically. Whether it's already embedded and working vs. inconsistently used or newly introduced changes the role's scope significantly. If you're also driving tool adoption on top of everything else, that's a meaningful chunk of change management work that isn't in the job title."
   },
   {
-    q: "What does the engineering team look like in terms of size, structure, and how they partner with product?",
-    why: "<strong>Why it matters:</strong> 124 people with aggressive growth targets needs strong eng-product collaboration. Understand the ratio, the working model, and whether PMs have enough engineering capacity to actually execute on roadmap."
+    q: "What's the biggest cross-team technical initiative that's stalled or struggling right now — and what's blocked it?",
+    why: "<strong>What it forces:</strong> Specificity about where the actual pain is. Vague answers ('we just need better coordination') suggest the role is less well-defined than the JD implies. A specific, honest answer tells you where you'd have the most early impact — and whether the blockers are political, technical, or process-based."
   },
   {
-    q: "How do you think about the competitive threat from Blackbaud investing in similar capabilities?",
-    why: "<strong>What it tests:</strong> Strategic awareness. The Blackbaud partnership is currently listed as a collaboration — but it's potentially fragile if Blackbaud decides to build or acquire rather than partner. A good answer shows they've thought through this contingency."
+    q: "Can you walk me through a recent decision that was contentious across these engineering teams? What data informed it, who had final say, and how did it land?",
+    why: "<strong>What it reveals:</strong> How decisions actually get made in the technical org — especially when the TPM (you) is trying to drive resolution on something teams disagree about. You value transparent reasoning and data-driven calls. If final say consistently goes to whoever shouts loudest, that's a meaningful constraint on your effectiveness."
+  },
+  {
+    q: "How does this role sit relative to the product organization — and who does the TPM report to?",
+    why: "<strong>Why it matters:</strong> The dual TPM + Platform PM framing is structurally unusual. Whether this role reports into product, engineering, or somewhere else shapes your authority, your allies, and where escalations land. A role that reports into engineering is a very different operating context than one that reports into a VP of Product."
   },
 ];
 
 const SELF_QUESTIONS = [
   {
-    label: "Does the mission land for you?",
-    detail: "Advancing education affordability and accessibility is meaningful work. Pressure-test whether that mission translates into daily product decisions or stays at the marketing level."
+    label: "Does the technical domain match your experience?",
+    detail: "The role requires credibility in AWS environments, SOC 2/PCI compliance programs, and working alongside infrastructure, data, and ML engineering teams. Can you walk into a room with these engineers and earn their trust quickly? Be honest about where your depth is vs. where you'd be learning on the job."
   },
   {
-    label: "Are you comfortable with growth-stage dynamics?",
-    detail: "124 people, Series A, aggressive targets. Priorities will shift. You've been at Apple, Amazon, and Google — this is a fundamentally different operating environment. More ownership and impact, less structure and more ambiguity."
+    label: "Are you energized by influence-without-authority?",
+    detail: "This role has no direct reports. Your leverage comes from clarity, relationships, and process discipline — not headcount. You're the connective tissue, not the decision-maker. After big-company PM roles with structural authority, reflect on whether that model feels energizing or frustrating."
+  },
+  {
+    label: "Are you comfortable being the internal-customer-facing PM, not the external one?",
+    detail: "Platform PM for Infrastructure means your 'customers' are Application Eng, Data Eng, and ML Eng teams — not donors, school administrators, or end users. That's a meaningful abstraction from the mission. Does working a layer removed from the product's social impact feel fulfilling, or distant?"
   },
   {
     label: "Can you work within the founder dynamic?",
-    detail: "Glassdoor signals that founders are reluctant to let go of control. You've been punished for pushing back on leadership before. Understand concretely how product decisions get made before accepting."
+    detail: "Glassdoor signals that founders are reluctant to let go of control. In a TPM role spanning infrastructure and compliance, founder involvement in technical decisions can range from zero to significant. Understand who actually makes architectural calls — and whether you'd have the space to drive your own program."
   },
   {
     label: "Is the compensation competitive?",
-    detail: "Below-average pay for non-management was flagged multiple times in Glassdoor reviews. Know your number and don't compromise on it."
+    detail: "Below-average pay for non-management was flagged multiple times in Glassdoor reviews. A senior IC TPM role with 10+ years required should command a strong number. Know your floor and don't compromise on it."
   },
   {
-    label: "How do you feel about the AI direction?",
-    detail: "GiveCampus is betting heavily on AI for fundraising. Given your complicated feelings about AI's broader impact, reconcile whether building AI-powered fundraising tools for education is the kind of AI work you can feel good about."
+    label: "Are you comfortable with growth-stage ambiguity?",
+    detail: "124 people, aggressive 5x growth targets, four engineering teams, a dual TPM/PM structure. The processes you'd be establishing likely don't fully exist yet. That's ownership opportunity — but also means you'd be building the plane while flying it. Weigh that honestly against what you need to do your best work."
   },
 ];
 
 const FLASHCARDS = [
   { cat: "Company Fact", q: "How many schools use GiveCampus, and what's the breakdown?", a: "1,300+ total: 550+ colleges/universities, 750+ independent K-12 schools. Over $6B raised, on track for $1B/year." },
-  { cat: "Company Fact", q: "Who founded GiveCampus and what's their background?", a: "Michael Kong (ex-Facebook engineer) and Kestrel Linder (ex-government consultant). Founded 2014 out of Y Combinator." },
-  { cat: "Company Fact", q: "What did GiveCampus raise, when, and from whom?", a: "$50M minority growth equity from Silversmith Capital Partners in 2022. Also appeared on Inc. 5000 four consecutive years." },
-  { cat: "Strategy", q: "What is GC Intelligence and why does it matter competitively?", a: "GiveCampus's AI engine: predictive donor targeting, smart ask amounts, generative AI outreach, contact reports, AI chat assistant. Central differentiation play vs. legacy competitors like Blackbaud." },
-  { cat: "Strategy", q: "What's the 3-year revenue target and the $100M commitment about?", a: "5x revenue growth in 3 years. $100M committed to product development. The Senior PM job posting explicitly references driving this growth." },
-  { cat: "Market Context", q: "What are the two main headwinds in higher education right now?", a: "13% projected enrollment decline through 2041. International student enrollment down 17% in fall 2025. More than half of private universities running operating deficits. Grad PLUS loans eliminated July 2026." },
-  { cat: "Market Context", q: "Why do the headwinds in higher ed actually strengthen GiveCampus's position?", a: "As tuition revenue shrinks, schools need fundraising to work harder. GiveCampus's value prop becomes more urgent, not less — they're selling a must-have, not a nice-to-have." },
-  { cat: "Competitive", q: "How does GiveCampus position against Blackbaud?", a: "Blackbaud is the 800-pound gorilla (legacy, broad nonprofit, slower on AI). GiveCampus differentiates on: education-only focus, faster AI execution, modern UX. Blackbaud currently lists GC as a partner — not yet a direct enterprise threat, but fragile." },
-  { cat: "Role", q: "What does the Senior PM role signal about what they want you to do?", a: "Growth-stage role, not maintenance. Emphasis on driving user trial/adoption/usage, 100% YoY growth in philanthropic dollars processed, cross-functional with Eng/Data/Partner Success/Marketing/BD." },
-  { cat: "Culture", q: "What does Glassdoor say about GiveCampus culture and what should you probe?", a: "3.2/5 overall. Positives: kind, mission-driven people. Concerns: leadership turnover, shifting priorities, founders reluctant to cede control, below-average pay for non-management. Ask junior/mid-level staff how culture has evolved." },
-  { cat: "Ask Them", q: "How do you probe whether the AI push is substance or marketing?", a: "Ask: 'How are you measuring the impact of GC Intelligence on customer outcomes?' If they don't have clear metrics on how AI is moving fundraising dollars, it may be more marketing than substance." },
-  { cat: "Ask Them", q: "How do you test whether you'll have real product autonomy vs. founder control?", a: "Ask: 'Can you walk me through a recent product decision that was contentious? What data informed it, who had final say, and how did it land?' This reveals who actually holds power when things get hard." },
+  { cat: "Company Fact", q: "Who founded GiveCampus and what's their background?", a: "Michael Kong (ex-Facebook engineer) and Kestrel Linder (ex-government consultant). Founded 2015 out of Y Combinator. Six consecutive years of profitability." },
+  { cat: "Company Fact", q: "What did GiveCampus raise, when, and from whom?", a: "$50M minority growth equity from Silversmith Capital Partners in 2022. Named to Y Combinator's Top Companies list and Inc. 5000 in 2022 and 2023." },
+  { cat: "Role", q: "What are the two distinct functions in the Senior TPM role?", a: "1) Technical Program Manager — owning execution across Infrastructure, Security, Data Engineering, and ML Engineering. 2) Platform PM for Infrastructure — internal customer voice, shaping the platform roadmap. Both in one role." },
+  { cat: "Role", q: "What are the four engineering teams this TPM spans?", a: "Infrastructure, Security, Data Engineering, and ML Engineering. You're the connective tissue across all four — plus translating needs from Application Engineering, which is a key internal customer." },
+  { cat: "Role", q: "What compliance programs does the role require experience with?", a: "SOC 2 and PCI compliance. Need experience managing these programs — not just awareness of them. The cloud environment is AWS." },
+  { cat: "Role", q: "What does '10+ years TPM experience' signal about this role?", a: "Senior IC role, no direct reports. Influence comes from clarity, relationships, and process — not headcount. They want someone who's owned complex cross-team programs before, not someone building their TPM foundation." },
+  { cat: "Strategy", q: "What is GC Intelligence and why does it matter for the TPM role?", a: "GiveCampus's AI engine: predictive donor targeting, smart ask amounts, generative AI outreach, contact reports. The ML Engineering team is in this TPM's scope — so you're helping deliver the company's central differentiation bet." },
+  { cat: "Market Context", q: "What are the main headwinds in higher education right now?", a: "13% projected enrollment decline through 2041. International student enrollment down 17% in fall 2025. More than half of private universities running operating deficits. Grad PLUS loan elimination starting July 2026." },
+  { cat: "Market Context", q: "Why do the higher ed headwinds actually strengthen GiveCampus's position?", a: "As tuition revenue shrinks, schools need fundraising to work harder. GiveCampus's value prop becomes more urgent — they're selling a must-have, not a nice-to-have." },
+  { cat: "Competitive", q: "How does GiveCampus position against Blackbaud?", a: "Blackbaud is the 800-pound gorilla (legacy, broad nonprofit, slower on AI). GiveCampus differentiates on education-only focus, faster AI execution, and modern UX. Blackbaud currently lists GC as a partner — not yet a direct enterprise threat, but fragile." },
+  { cat: "Culture", q: "What does Glassdoor say and what should you probe?", a: "3.2/5 overall. Positives: kind, mission-driven people. Concerns: leadership turnover, shifting priorities, founders reluctant to cede control, below-average pay for non-management. Ask junior/mid-level staff how culture has evolved." },
+  { cat: "Ask Them", q: "How do you probe the real state of infrastructure program management?", a: "Ask: 'What's the biggest cross-team technical initiative that's stalled or struggling right now — and what's blocked it?' Forces specificity about where the actual pain is and whether the role is well-defined or still being figured out." },
+  { cat: "Ask Them", q: "How do you test whether Linear adoption is a tool or a project?", a: "Ask: 'Is Linear fully adopted across these four teams, or would driving that adoption be part of the role?' The answer changes the scope significantly — tool vs. change management project." },
 ];
 
 const SOURCES = [
@@ -649,7 +681,7 @@ const SOURCES = [
   { label: "GC Intelligence / AI", url: "https://go.givecampus.com/capabilities/artificial-intelligence/" },
   { label: "Inc. 5000 Recognition", url: "https://go.givecampus.com/about-us/awards-press-media/givecampus-ranks-no-2678-on-the-2025-inc-5000-list/" },
   { label: "GiveCampus Careers", url: "https://go.givecampus.com/about-us/careers/" },
-  { label: "Senior PM Job Posting", url: "https://job-boards.greenhouse.io/givecampus/jobs/4005328009" },
+  { label: "Senior TPM Job Posting", url: "https://job-boards.greenhouse.io/givecampus/jobs/4118165009" },
   { label: "GiveCampus on Y Combinator", url: "https://www.ycombinator.com/companies/givecampus" },
   { label: "Glassdoor Reviews", url: "https://www.glassdoor.com/Reviews/GiveCampus-Reviews-E2427221.htm" },
   { label: "Building a Mission-Driven Company (Blog)", url: "https://go.givecampus.com/blog/building-a-mission-driven-company/" },
